@@ -1,9 +1,10 @@
 // SceneApp.js
 
 import alfrid, { Scene, GL } from 'alfrid';
-import ViewObjModel from './ViewObjModel';
 import ViewFloor from './ViewFloor';
+import ViewChar from './ViewChar';
 import Assets from './Assets';
+import Params from './Params';
 import VIVEUtils from './utils/VIVEUtils';
 
 const scissor = function(x, y, w, h) {
@@ -49,8 +50,8 @@ class SceneApp extends Scene {
 
 		this._bCopy = new alfrid.BatchCopy();
 
-		this._vModel = new ViewObjModel();
 		this._vFloor = new ViewFloor();
+		this._vChar = new ViewChar();
 	}
 
 
@@ -61,7 +62,7 @@ class SceneApp extends Scene {
 
 	toRender() {
 		if(VIVEUtils.hasVR) {	VIVEUtils.vrDisplay.requestAnimationFrame(()=>this.toRender());	}		
-
+		Params.time += 0.01;
 
 		if(VIVEUtils.hasVR) {
 			VIVEUtils.getFrameData();
@@ -104,6 +105,7 @@ class SceneApp extends Scene {
 		const g = .95;
 		GL.clear(g, g, g, 1);
 		this._vFloor.render();
+		this._vChar.render(Assets.get('studio_radiance'), Assets.get('irr'));
 	}
 
 

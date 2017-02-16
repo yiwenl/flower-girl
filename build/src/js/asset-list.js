@@ -18,7 +18,8 @@ const assetsToLoad = [
 	{"id":"texture_05","url":"assets/img/texture_05.png","type":"png"},
 	{"id":"texture_06","url":"assets/img/texture_06.png","type":"png"},
 	{"id":"texture_07","url":"assets/img/texture_07.png","type":"png"},
-	{"id":"model","url":"assets/obj/model.obj","type":"text"}
+	{"id":"texture_08","url":"assets/img/texture_08.png","type":"png"},
+	{"id":"kuafu","url":"assets/obj/kuafu.obj","type":"text"}
 ];
 
 

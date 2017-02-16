@@ -3,13 +3,18 @@
 import alfrid, { GL } from 'alfrid';
 
 import Assets from './Assets';
+import Params from './Params';
 import vs from 'shaders/floor.vert';
 import fs from 'shaders/floor.frag';
+
+import vsOutline from 'shaders/outline.vert';
+import fsOutline from 'shaders/outline.frag';
 
 class ViewFloor extends alfrid.View {
 	
 	constructor() {
 		super(vs, fs);
+		this.shaderOutline = new alfrid.GLShader(vsOutline, fsOutline);
 	}
 
 
@@ -20,6 +25,7 @@ class ViewFloor extends alfrid.View {
 		const positions = [];
 		const uvs = [];
 		const indices = [];
+		const normals = [];
 		let count = 0;
 
 		const getPosition = function(i, j) {
@@ -34,12 +40,35 @@ class ViewFloor extends alfrid.View {
 			return [x, y, z];
 		}
 
+
+
+
 		for(let i=0; i<numSeg; i++) {
 			for(let j=0; j<numSeg; j++) {
-				positions.push(getPosition(i, j));
-				positions.push(getPosition(i+1, j));
-				positions.push(getPosition(i+1, j+1));
-				positions.push(getPosition(i, j+1));
+
+				const p0 = getPosition(i, j);
+				const p1 = getPosition(i+1, j);
+				const p2 = getPosition(i+1, j+1);
+				const p3 = getPosition(i, j+1);
+
+				const v0 = vec3.create();
+				const v1 = vec3.create();
+				const n = vec3.create();
+				vec3.sub(v0, p1, p0);
+				vec3.sub(v1, p2, p0);
+				vec3.cross(n, v0, v1);
+				vec3.normalize(n, n);
+
+
+				positions.push(p0);
+				positions.push(p1);
+				positions.push(p2);
+				positions.push(p3);
+
+				normals.push(n);
+				normals.push(n);
+				normals.push(n);
+				normals.push(n);
 
 
 				uvs.push([i/numSeg, j/numSeg]);
@@ -62,7 +91,8 @@ class ViewFloor extends alfrid.View {
 		this.mesh.bufferVertex(positions);
 		this.mesh.bufferTexCoord(uvs);
 		this.mesh.bufferIndex(indices);
-		this.texture = Assets.get('spot');
+		this.mesh.bufferNormal(normals);
+		this.texture = Assets.get('texture_08');
 
 		this.floorColor = [255, 217, 0];
 		gui.addColor(this, 'floorColor');
@@ -74,10 +104,22 @@ class ViewFloor extends alfrid.View {
 		this.shader.bind();
 		this.shader.uniform("texture", "uniform1i", 0);
 		this.texture.bind(0);
-
 		this.shader.uniform("uFloorColor", "vec3", color);
-
 		GL.draw(this.mesh);
+
+/*
+		this.shaderOutline.bind();
+		this.shaderOutline.uniform("uTime", "float", Params.time);
+		this.shaderOutline.uniform("uOutlineColor", "vec3", Params.outlineColor);
+		this.shaderOutline.uniform("uOutlineWidth", "float", Params.outlineWidth);
+		this.shaderOutline.uniform("uOutlineNoise", "float", Params.outlineNoise);
+		this.shaderOutline.uniform("uOutlineNoiseStrength", "float", Params.outlineNoiseStrength);
+
+		GL.gl.cullFace(GL.gl.FRONT);
+		GL.draw(this.mesh);
+		GL.gl.cullFace(GL.gl.BACK);
+*/
+		
 	}
 
 

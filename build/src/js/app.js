@@ -6,6 +6,7 @@ import dat from 'dat-gui';
 import Stats from 'stats.js';
 import assets from './asset-list';
 import Assets from './Assets';
+import Params from './Params';
 import VIVEUtils from './utils/VIVEUtils';
 
 if(document.body) {
@@ -100,6 +101,7 @@ function _init3D() {
 
 	//	INIT DAT-GUI
 	window.gui = new dat.GUI({ width:300 });
+	gui.add(Params, 'outlineWidth', 0, .2);
 
 	//	CREATE SCENE
 	scene = new SceneApp();

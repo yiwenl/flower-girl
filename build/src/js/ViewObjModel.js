@@ -10,6 +10,7 @@ class ViewObjModel extends alfrid.View {
 	
 	constructor() {
 		super(vs, fs);
+		this.shaderOutline = new alfrid.GLShader(vsOutline, fsOutline);
 	}
 
 

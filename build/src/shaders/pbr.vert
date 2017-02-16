@@ -12,6 +12,8 @@ uniform mat4 uViewMatrix;
 uniform mat4 uProjectionMatrix;
 uniform mat3 uNormalMatrix;
 uniform mat3 uModelViewMatrixInverse;
+uniform vec3 uPosition;
+uniform vec3 uScale;
 
 varying vec2 vTextureCoord;
 
@@ -23,7 +25,7 @@ varying vec3 vWsNormal;
 
 
 void main(void) {
-	vec3 position 			= aVertexPosition;
+	vec3 position 			= aVertexPosition * uScale + uPosition;
 	vec4 worldSpacePosition	= uModelMatrix * vec4(position, 1.0);
     vec4 viewSpacePosition	= uViewMatrix * worldSpacePosition;
 	

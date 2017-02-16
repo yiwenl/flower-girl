@@ -4,6 +4,7 @@
 
 precision highp float;
 varying vec2 vTextureCoord;
+varying vec3 vNormal;
 uniform sampler2D texture;
 uniform vec3 uFloorColor;
 
@@ -27,4 +28,6 @@ void main(void) {
     float d = distance(vTextureCoord, vec2(.5));
     d = smoothstep(0.5, 0.4, d);
     gl_FragColor.a *= d;
+
+    // gl_FragColor = vec4(vNormal, 1.0);
 }
