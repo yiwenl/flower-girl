@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<head>
+
+	<!-- <script type="text/javascript" src="https://www.bbc.co.uk/taster/pilot-lib.js"></script> -->
+
+	<meta http-equiv="content-type" content="text/html; charset=UTF8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui" />
+
+	<meta property="og:title" content="Doctor Who: Time Vortex 360">
+	<meta property="og:url" content="http://www.bbc.co.uk/taster/projects/doctor-who-vortex-360">
+	<meta property="og:type" content="website">
+	<meta property="og:description" content="Pilot the TARDIS on its most exhilarating journey yet, as it careers through the depths of the space time vortex.">
+	<meta property="og:image" content="http://www.bbc.co.uk/taster/projects/doctor-who-vortex-360/assets/image/high/common/social_post_image.jpg">
+
+	<meta name="twitter:card" content="photo">
+	<meta name="twitter:creator" content="BBC">
+	<meta name="twitter:url" content="http://www.bbc.co.uk/taster/projects/doctor-who-vortex-360">
+	<meta name="twitter:title" content="Doctor Who: Time Vortex 360">
+	<meta name="twitter:description" content="Pilot the TARDIS on its most exhilarating journey yet, as it careers through the depths of the space time vortex.">
+	<meta name="twitter:image" content="http://www.bbc.co.uk/taster/projects/doctor-who-vortex-360/assets/image/high/common/social_post_image.jpg">
+
+
+	<link rel="icon" href="assets/favicons/favicon.png" type="image/png">
+	<link rel="stylesheet" type="text/css" href="./assets/css/main.css">
+
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/touch-icon-114x114.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/touch-icon-72x72.png">
+	<link rel="apple-touch-icon-precomposed" sizes="57x57" href="images/touch-icon-57x57.png">
+	<link rel="apple-touch-icon-precomposed" href="images/touch-icon-57x57.png">
+	<meta name="description" content="">
+
+	<title>Doctor Who: Time Vortex 360</title>
+</head>
+
+<body>
+
+	<!-- <script src="http://static.test.bbci.co.uk/playpen/1.2.4/script/require/require.js"></script> -->
+	<script src="./assets/js/require/r.js"></script>
+	<!-- <iframe class="taster-offsite-panel" src="https://www.bbc.co.uk/taster/projects/doctor-who-time-vortex-360/offsite/rate_mvt?variant=b" frameborder="0" scrolling="no" id="iFrameResizer"></iframe> -->
+	
+	
+	<script src="./assets/main.js"></script>
+	<div id="og-game-holder"></div>
+	
+	
+	<script>
+
+		(function(){
+			window.og = {
+				gid: "countdown-test",
+				gameDir: "",
+				gameContainerId: "og-game-holder",
+				isFullScreen: window.self === window.top,
+				exitGameUrl: "http://bbc.co.uk/",
+				environment: "test",
+				embedVars: {
+					statsCounterName: "testCounterName",
+					statsAppName: "TestAppName"
+				}
+			};
+
+			console.warn("Using mocked bbccookies");
+			bbccookies = {
+				isAllowed: function() {
+					return true;
+				},
+
+				cookiesEnabled: function() {
+					return true;
+				},
+
+				set: function() {
+				},
+
+				get: function() {
+					return "";
+					// set this to force audience segment
+					// return "ckns_mandolin_setSegments={'hiScores':'yes'};";
+				}
+			};
+
+			requirejs.config({
+				paths: {
+					"Game": "game",
+					"echo": "http://static.bbci.co.uk/nkdata/echoclient/2.0.0/sharedmodules/echo"
+				}
+			});
+
+
+			require(["echo"], function(echo) {
+				window.echo = echo;
+				window.initGame();
+
+			});
+
+		})();
+	</script>
+
+	<!-- <script type="text/javascript">
+		require(['pilot-lib/taster-offsite-panel'], function (Panel) {
+			var panel = new Panel('.taster-offsite-panel');
+		});
+	</script> -->
+
+
+	<button class='enter-vr'></button>
+</body>
+
+</html>

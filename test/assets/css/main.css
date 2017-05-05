@@ -1,0 +1,36 @@
+/*main.css*/
+
+
+.enter-vr {
+    position: fixed;
+    z-index: 999999;
+    border: none;
+    width: 100px;
+    height: 100px;
+    background: url(../image/high/common/vr-logo.png);
+    background-size: cover;
+
+
+    left: 50%;
+    margin-left: -50px;
+    bottom: 10%;
+    display: none;
+}
+
+
+.enter-vr.hasVR {
+	display: block;
+}
+
+
+
+.debug {
+    position: fixed;
+    color:white;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+
+    font-size: 20px;
+    width:100%;
+}
